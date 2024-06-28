@@ -6,7 +6,7 @@ dev loop on file changes.
 ## Installation
 
 Add `gem 'hypertest'` to your Gemfile, maybe in a `:development, :test` group,
-then `bundle install`.
+then `bundle install`. `gem 'bootsnap'` is also recommended also.
 
 Generally you will want to use Hypertest by creating a file like:
 
