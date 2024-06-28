@@ -1,39 +1,45 @@
 # Hypertest
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hypertest`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Hypertest is a very simple tool to help you run fast test suites in a very tight
+dev loop on file changes.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add `gem 'hypertest'` to your Gemfile, maybe in a `:development, :test` group,
+then `bundle install`.
+
+Generally you will want to use Hypertest by creating a file like:
 
 ```ruby
-gem 'hypertest'
+#!/usr/bin/env ruby
+# bin/hypertest
+
+require 'bundler/setup'
+Bundler.require(:development, :test)
+
+ROOT = File.expand_path('..', __dir__)
+$LOAD_PATH.unshift(File.join(ROOT, 'lib'))
+$LOAD_PATH.unshift(File.join(ROOT, 'tests'))
+
+# Bootsnap isn't necessary but generally speeds things up even further.
+Bootsnap.setup(
+  cache_dir:          "#{ROOT}/tmp/cache",
+  ignore_directories: [],
+  development_mode:   true,
+  load_path_cache:    true,
+  compile_cache_iseq: true,
+  compile_cache_yaml: true,
+  compile_cache_json: true,
+  readonly:           false,
+)
+
+Hypertest.run do
+  require 'test_helper'
+  Dir.glob('tests/**/*_test.rb').each do |file|
+    require File.join(ROOT, file)
+  end
+end
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install hypertest
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/burke/hypertest.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+This loads ruby and your bundle, then forks to load your test helper and tests
+after each file change. Happy hacking!

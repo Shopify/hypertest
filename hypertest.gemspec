@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "hypertest"
-  spec.version       = "0.1.1"
+  spec.version       = "0.1.0"
   spec.authors       = ["Burke Libbey"]
   spec.email         = ["burke.libbey@shopify.com"]
 
@@ -12,10 +12,6 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Run tests fast}
   spec.homepage      = "https://github.com/Shopify/hypertest"
   spec.license       = "MIT"
-
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = spec.homepage
-  spec.metadata["changelog_uri"] =spec.homepage
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
