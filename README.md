@@ -19,7 +19,7 @@ Bundler.require(:development, :test)
 
 ROOT = File.expand_path('..', __dir__)
 $LOAD_PATH.unshift(File.join(ROOT, 'lib'))
-$LOAD_PATH.unshift(File.join(ROOT, 'tests'))
+$LOAD_PATH.unshift(File.join(ROOT, 'test'))
 
 # Bootsnap isn't necessary but generally speeds things up even further.
 Bootsnap.setup(
@@ -35,7 +35,7 @@ Bootsnap.setup(
 
 Hypertest.run do
   require 'test_helper'
-  Dir.glob('tests/**/*_test.rb').each do |file|
+  Dir.glob('test/**/*_test.rb').each do |file|
     require File.join(ROOT, file)
   end
 end
