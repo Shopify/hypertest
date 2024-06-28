@@ -43,3 +43,11 @@ end
 
 This loads ruby and your bundle, then forks to load your test helper and tests
 after each file change. Happy hacking!
+
+## Limitations
+
+* Only works on macOS because I've only implemented this with FSEvents. Patches
+welcome.
+* Path filtering (`ignore:`) can only match on directory paths because the
+  FSEvents library doesn't seem to want to let me use `file_events: true`.
+* 

@@ -46,10 +46,18 @@ module Hypertest
     def print_result(t1, t2, stat)
       ms = ((t2 - t1) * 1000).round
       if stat.success?
-        STDERR.puts "\x1b[1;34m%% Completed in #{ms}ms\x1b[0m"
+        info("Completed in #{ms}ms")
       else
-        STDERR.puts "\x1b[1;31m%% Failed in #{ms}ms\x1b[0m"
+        err("Failed in #{ms}ms")
       end
+    end
+
+    def info(msg)
+      STDERR.puts("\x1b[1;34m%% #{msg}\x1b[0m")
+    end
+
+    def err(msg)
+      STDERR.puts("\x1b[1;31m%% #{msg}\x1b[0m")
     end
   end
 end
