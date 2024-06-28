@@ -7,6 +7,7 @@ module Hypertest
     #    initiating a run
     # &block: run your tests!
     def run(ignore: %r{/(?:\.git|tmp)/}, debounce: 0.050, &block)
+      info("\033[38;5;196mh\033[38;5;197my\033[38;5;198mp\033[38;5;199me\033[38;5;200mr\033[38;5;201mt\033[38;5;202me\033[38;5;203ms\033[38;5;204mt\033[0;1;34m initialized")
       q = Queue.new
       Thread.new { produce(q, ignore) }
       consume(q, debounce, &block)
@@ -53,11 +54,11 @@ module Hypertest
     end
 
     def info(msg)
-      STDERR.puts("\x1b[1;34m%% #{msg}\x1b[0m")
+      STDERR.puts("\x1b[1;34m❖ #{msg}\x1b[0m")
     end
 
     def err(msg)
-      STDERR.puts("\x1b[1;31m%% #{msg}\x1b[0m")
+      STDERR.puts("\x1b[1;31m❖ #{msg}\x1b[0m")
     end
   end
 end
