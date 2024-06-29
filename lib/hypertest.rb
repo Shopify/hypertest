@@ -53,12 +53,14 @@ module Hypertest
       end
     end
 
+    GLYPH = '⇶'
+
     def info(msg)
-      STDERR.puts("\x1b[1;34m❖ #{msg}\x1b[0m")
+      STDERR.puts("\x1b[1;34m#{GLYPH} #{msg}\x1b[0m")
     end
 
     def err(msg)
-      STDERR.puts("\x1b[1;31m❖ #{msg}\x1b[0m")
+      STDERR.puts("\x1b[1;31m#{GLYPH} #{msg}\x1b[0m")
     end
   end
 end
